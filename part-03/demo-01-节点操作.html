@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>节点操作</title>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    button {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+    div {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button class="appendBtn">在书籍列表1尾部添加一本书</button>
+  <button class="prependBtn">在书籍列表1顶部插入一本书</button>
+  <button class="beforeBtn">在书籍《辞海》前插入一本书</button>
+  <button class="afterBtn">在书籍《辞海》后插入一本书</button>
+  <button class="cloneBtn">将列表1中的节点克隆到列表2中</button>
+  <button class="removeBtn">删除书籍列表2中第一本书</button>
+  <button class="emptyBtn">清除书籍列表2</button>
+
+  <p>书籍列表1:</p>
+  <ul class="book-list-1">
+    <li class="ci-hai">《辞海》</li>
+  </ul>
+
+  <p>书籍列表2:</p>
+  <ul class="book-list-2">
+    <li>《经典名人演讲全集》</li>
+  </ul>
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('.appendBtn').on('click', function () { 
+      let newBook = $('<li>《Java web 开发技术》</li>');
+      $('.book-list-1').append(newBook);
+    })
+
+    $('.prependBtn').on('click', function () { 
+      let newBook = $('<li>《软件设计师教程》</li>');
+      $('.book-list-1').prepend(newBook);
+    })
+
+    $('.beforeBtn').on('click', function () { 
+      let newBook = $('<li>《C Primer Plus》</li>');
+      $('.ci-hai').prepend(newBook);
+    })
+
+    $('.afterBtn').on('click', function () { 
+      let newBook = $('<li>《反向思考》</li>');
+      $('.ci-hai').after(newBook);
+    })
+
+    $('.cloneBtn').on('click', function () {
+      let cloneList = $('.book-list-1 > li').clone(true);
+      $('.book-list-2').append(cloneList);
+    })
+
+    $('.removeBtn').on('click', function () {
+      let firBook = $($('.book-list-2 > li')[0]);
+      firBook.remove();
+    })
+
+    $('.emptyBtn').on('click', function () {
+      $('.book-list-2').empty();
+    })
+  </script>
+</body>
+</html>

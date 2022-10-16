@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>属性操作</title>
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    button {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+    div {
+      margin-bottom: 10px;
+    }
+    .header {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <button class="get-header">获取头像</button>
+  <button class="remove-header">移除右边头像</button>
+  <br />
+  <img class="header img1">
+  <img class="header img2">
+  <br />
+
+  <button class="check-status">切换下方多选框状态</button>
+  <br />
+  <label for="check1">北京</label>
+  <input id="cityCheck" name="check1" type="checkbox" />
+  <br />
+
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    // 设置/获取属性
+    $('.get-header').on('click', function () { 
+      // 1、设置单个属性
+      $('.img1').attr('src', 'https://img2.woyaogexing.com/2022/10/13/6a13c9621354e2bc!400x400.jpg')
+      // 2、设置多个属性
+      $('.img2').attr({
+        'src': 'https://img2.woyaogexing.com/2022/10/13/5bb7a75f84807b0a!400x400.jpg',
+        'alt': '头像'
+      })
+      // 3、获取属性的值
+      console.log($('.img2').attr('src'));
+    })
+    // 移除属性
+    $('.remove-header').on('click', function() {
+      $('.img2').removeAttr('src')
+    })
+    // 操作布尔类型
+    $('.check-status').on('click', function() {
+      $('#cityCheck').prop('checked', !$('#cityCheck').prop('checked'))
+    })
+  </script>
+</body>
+</html>
