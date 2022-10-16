@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>带动画的下拉菜单</title>
+  <style>
+    .select {
+      position: absolute;
+      transform: translateX(-50%);
+      left: 50%;
+    }
+    p {
+      margin: 0;
+      background-color: #3478C6;
+      width: 100px;
+    }
+    p:hover {
+      cursor: pointer;
+    }
+    .options-area {
+      width: 100px;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-left: 1px solid #1E1E1E;
+      border-right: 1px solid #1E1E1E;
+      display: none;
+    }
+    li {
+      cursor: pointer;
+      list-style: none;
+      border-bottom: 1px solid #1E1E1E;
+    }
+    li:nth-child(1) {
+      border-top: 1px solid #1E1E1E;
+    }
+  </style>
+</head>
+<body>
+  <div class="select">
+    <p class="select-textarea">
+      <span class="text">暂不选择</span>
+    </p>
+    <ul class="options-area">
+      <li class="options">暂不选择</li>
+      <li class="options">北京</li>
+      <li class="options">上海</li>
+      <li class="options">深圳</li>
+    </ul>
+  </div>
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('.select-textarea')
+      .mouseenter(function () { 
+        $('.options-area').stop(true, false).slideDown();
+      })
+    $('.select').mouseleave(function() {
+      $('.options-area').slideUp();
+    })
+
+    $('.options-area')
+      .mouseleave(function () { 
+        $('.options-area').slideUp();
+      });
+    $('.options')
+      .mouseenter(function (e) {
+        $(e.target).css('backgroundColor', 'gray');
+      })
+      .mouseleave(function (e) { 
+        $(e.target).css('backgroundColor', '#fff');
+      });
+    $('.options-area').click(function (e) {
+      let txt = $(e.target).text();
+      $('.select-textarea').text(txt);
+      $('.options-area').slideUp();
+    });
+  </script>
+</body>
+</html>

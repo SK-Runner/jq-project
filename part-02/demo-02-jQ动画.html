@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery动画</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      display: none;
+    }
+    button {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <button id="show">显示</button>
+  <button id="hidden">隐藏</button>
+  <button id="toggle">显示/隐藏切换</button>
+  <div id="demo1"></div>
+
+  <br />
+  <button id="slideDown">滑入</button>
+  <button id="slideUp">滑出</button>
+  <button id="slideToggle">滑入/滑出切换</button>
+  <div id="demo2"></div>
+
+  <br />
+  <button id="fadeIn">淡入</button>
+  <button id="fadeOut">淡出</button>
+  <button id="fadeToggle">淡入/淡出切换</button>
+  <button id="fadeTo">3秒淡入到透明度为0.5</button>
+  <div id="demo3"></div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('#show').click(function () {
+      $('#demo1').show(2000, function(){
+        alert('show over')
+      })
+    })
+
+    $('#hidden').click(function () {
+      $('#demo1').hide(2000, function(){
+        alert('hidden over')
+      })
+    })
+
+    $('#toggle').click(function () {
+      $('#demo1').toggle(2000, function(){
+        alert('toggle over')
+      })
+    })
+
+    $('#slideDown').click(function () {
+      $('#demo2').slideDown(1000, function(){
+        alert('slideDown over')
+      })
+    })
+
+    $('#slideUp').click(function () {
+      $('#demo2').slideUp(1000, function(){
+        alert('slideUp over')
+      })
+    })
+
+    $('#slideToggle').click(function () {
+      $('#demo2').slideToggle(1000, function(){
+        alert('slideToggle over')
+      })
+    })
+
+    $('#fadeIn').click(function () {
+      $('#demo3').fadeIn(1000, function(){
+        alert('fadeIn over')
+      })
+    })
+
+    $('#fadeOut').click(function () {
+      $('#demo3').fadeOut(1000, function(){
+        alert('fadeOut over')
+      })
+    })
+
+    $('#fadeToggle').click(function () {
+      $('#demo3').fadeToggle(1000, function(){
+        alert('fadeToggle over')
+      })
+    })
+
+    $('#fadeTo').click(function () {
+      $('#demo3').fadeTo(3000, 0.5)
+    })
+  </script>
+</body>
+</html>

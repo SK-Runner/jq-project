@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>类名操作</title>
+  <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: aqua;
+      margin-bottom: 10px;
+    }
+    button {
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+    .border-1 {
+      border: 1px solid black;
+    }
+    .large {
+      width: 150px;
+      height: 150px;
+    }
+    .bg-red {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <button id="addSingle">添加单个类名</button>
+  <button id="addMultiple">添加多个类名</button>
+  <button id="removeAll">移除所有类名</button>
+  <button id="removeSingle">移除单个类名</button>
+  <button id="removeMultiple">移除多个类名</button>
+  <div id="demoOne"></div>
+
+  <button id="changeClass">判断类名</button>
+  <div id="demoTwo"></div>
+
+  <button id="toggleClass">切换类名</button>
+  <div id="demoThree"></div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('#addSingle').click(function (e) { 
+      $('#demoOne').addClass('border-1');
+    });
+
+    $('#addMultiple').click(function (e) { 
+      $('#demoOne').addClass('large bg-red');
+    });
+
+    $('#removeAll').click(function (e) { 
+      $('#demoOne').removeClass();
+    });
+
+    $('#removeSingle').click(function (e) { 
+      $('#demoOne').removeClass('border-1');
+    });
+
+    $('#removeMultiple').click(function (e) { 
+      $('#demoOne').removeClass('large bg-red');
+    });
+    
+    $('#changeClass').click(function (e) { 
+      if($('#demoTwo').hasClass('large')) {
+        $('#demoTwo').removeClass();
+      } else {
+        $('#demoTwo').addClass('large bg-red');
+      }
+    });
+
+    $('#toggleClass').click(function (e) { 
+      $('#demoThree').toggleClass('large');
+    });
+  </script>
+</body>
+</html>
