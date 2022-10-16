@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>突出显示</title>
+  <style>
+    .container {
+      width: 580px;
+      height: 400px;
+      box-sizing: border-box;
+      padding: 10px;
+      background-color: black;
+      margin: 0 auto;
+    }
+    .window-grid {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+      align-content: space-around;
+      flex-wrap: wrap;
+    }
+    .options {
+      width: 180px;
+      height: 180px;
+      overflow: hidden;
+      list-style: none;
+      cursor: pointer;
+    }
+    .pic {
+      width: 180px;
+      height: 180px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="window-grid">
+      <li class="options"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.qXURmfpWd5ty35KNFIgIfQHaHa?w=143&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+      <li class="options"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.Qc7ONHWmVh12eehGOxq-dAHaHa?w=143&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+      <li class="options"><img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.WQO1jk0IN0Ud9b1boSrTMgAAAA?w=143&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+      <li class="options"><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.mQs0v1DVHlIHb2daFATtiwAAAA?w=143&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+      <li class="options"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.njtw_fEYs9CIoxXAnR3hpwAAAA?w=143&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+      <li class="options"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.-qKEdC6vl0CCHrAVF3kmXgAAAA?w=144&h=150&c=7&r=0&o=5&dpr=2&pid=1.7" alt="" class="pic"></li>
+    </ul>
+  </div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('.options')
+    .mouseenter(function (e) {
+      $(e.currentTarget).siblings().css('opacity', '0.4');
+    })
+    .mouseleave(function () { 
+      $('.options').css('opacity', '1');
+    })
+  </script>
+</body>
+</html>

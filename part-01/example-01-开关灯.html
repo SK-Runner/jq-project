@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>开关灯</title>
+</head>
+<body>
+  <button id="open">开灯</button>
+  <button id="close">关灯</button>
+  <div>
+    <img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.Mq9zt66lU2fko_h2OWHIlAHaE8?w=295&h=197&c=7&r=0&o=5&dpr=2&pid=1.7" alt="图片">
+  </div>
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $(function() {
+      let open = $('#open');
+      let close = $('#close');
+      let body = $('body')
+      open.click(function (e) {
+        body.css('background-color', '#fff')
+      });
+      close.click(function (e) {
+        body.css('background-color', '#1E1E1E')
+      });
+    })
+  </script>
+</body>
+</html>

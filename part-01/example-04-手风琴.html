@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手风琴</title>
+  <style>
+    .container {
+      width: 550px;
+      margin: 0 auto;
+    }
+    .collapse {
+      width: 100%;
+      margin-top: 15px 0 0;
+      padding: 0;
+      border-top: 1px solid gray;
+    }
+    .options {
+      list-style: none;
+      border-bottom: 1px solid gray;
+    }
+    .title {
+      line-height: 46px;
+      cursor: pointer;
+      margin: 0;
+    }
+    .content {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="all-mode">全部展开模式</button>
+    <button class="single-mode">单一展开模式</button>
+    <ul class="collapse">
+      <li class="options">
+        <p class="title">Consistency</p>
+        <p class="content">Consistent with real life: in line with the process and logic of real
+          life, and comply with languages and habits that the users are used to;</p>
+      </li>
+      <li class="options">
+        <p class="title">Feedback</p>
+        <p class="content">Operation feedback: enable the users to clearly perceive their
+          operations by style updates and interactive effects;</p>
+      </li>
+      <li class="options">
+        <p class="title">Efficiency</p>
+        <p class="content">Definite and clear: enunciate your intentions clearly so that the
+          users can quickly understand and make decisions;</p>
+      </li>
+      <li class="options">
+        <p class="title">Controllability</p>
+        <p class="content">Controlled consequences: users should be granted the freedom to
+          operate, including canceling, aborting or terminating current
+          operation.</p>
+      </li>
+    </ul>
+  </div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $('.all-mode').click(function (e) { 
+      window.collapseMode = 'all'
+    });
+    $('.single-mode').click(function (e) { 
+      window.collapseMode = 'single'
+    });
+    $('.title').click(function(e) {
+      let nextNode = $(e.target).next()
+      if(window.collapseMode === 'single') {
+        console.log(1);
+        $('.content').css({
+          'display': 'none'
+        })
+      }
+      let displayState = nextNode.css('display') === 'none' ? 'block' : 'none';
+      nextNode.css('display', displayState)
+    })
+  </script>
+</body>
+</html>

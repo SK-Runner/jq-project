@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="ccontainer">
+
+  </div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    // 1、入口函数两种声明方式
+    // 1.1
+    $(document).ready(function() {
+      alert('ready function one');
+    })
+    // 1.2
+    $(function() {
+      alert('ready function two');
+    })
+
+    // 2、jquery入口函数和window.onload的区别
+    // 2.1 jquery入口函数可以声名多个，onload只能声名一次
+    // 2.1 jquery入口函数调用在onload之前，因为onload是等资源（js、css、dom、图片）全部加载完毕就执行，jquery入口函数只是等待dom树加载完毕后执行
+  </script>
+</body>
+</html>

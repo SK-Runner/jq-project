@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="xiShu">
+    <ul id="xiShuMenber">
+      <li id="liuBei">刘备</li>
+      <li class="mou-chen">诸葛亮</li>
+      <li class="shu-wu-jiang">关羽</li>
+      <li class="shu-wu-jiang">张飞</li>
+      <li class="shu-wu-jiang">赵云</li>
+      <li class="shu-wu-jiang">马超</li>
+      <li class="shu-wu-jiang">黄忠</li>
+    </ul>
+  </div>
+  <div id="beiWei">
+    <ul id="beiWeiMenber">
+      <li id="caoCao">曹操</li>
+      <li class="mou-chen">许褚</li>
+      <li class="mou-chen">荀彧</li>
+      <li class="mou-chen">郭嘉</li>
+      <li>典韦</li>
+      <li>徐晃</li>
+      <li>张辽</li>
+      <li>于禁</li>
+    </ul>
+  </div>
+  <div id="dongWu">
+    <ul id="dongWuMenber">
+      <li id="sunQuan">孙权</li>
+      <li class="mou-chen">鲁肃</li>
+      <li class="wu-jiang">周瑜</li>
+      <li class="wu-jiang">吕蒙</li>
+      <li class="wu-jiang">陆逊</li>
+      <li class="wu-jiang">程普</li>
+      <li class="wu-jiang">黄盖</li>
+      <li class="wu-jiang">甘宁</li>
+    </ul>
+  </div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $(function() {
+      // jQuery 选择器
+      // 1、标签选择器
+      $('body').css('backgroundColor', '#E2E5EA');
+      // 2、id选择器, 并集选择器
+      $('#liuBei , #caoCao , #sunQuan').css({
+        'fontSize': '30px',
+        'color': 'red',
+        'fontWeight': '800'
+      })
+      // 3、类选择器
+      $('.mou-chen').css({
+        'fontSize': '24px',
+        'color': 'green',
+      })
+      // 4、交集选择器
+      $('li.shu-wu-jiang').css({
+        'fontSize': '24px',
+        'color': '#CB9F46'
+      })
+
+      // jQuery 层级选择器
+      // 1、子代选择器
+      $('div > ul').css('border', '2px solid')
+
+      // 2、后代选择器
+      $('body ul').css('borderColor', 'black')
+
+      // jQuery 过滤选择器------>带冒号“：”
+      // 1、索引为index的元素（从0开始）
+      $('body>ul:eq(0) , body>ul:eq(1)').css('margin-bottom', '5px')
+
+      // 2、奇数选择器，偶数选择器
+      $('ul>li:odd').css('backgroundColor', '#E3E5EA')
+      $('ul>li:even').css('backgroundColor', '#F5F7FA')
+
+      // jQuery 筛选选择器------>方法
+      // 1、子类选择器------>功能类似子代选择器
+      $('ul').children().css('listStyle', 'none')
+
+      // 2、后代选择器------>功能类似上方后代选择器
+      $('div').find('ul').css('padding', '0')
+
+      // 3、兄弟节点（不包含自己）
+      $('#dongWuMenber > #sunQuan').siblings('.wu-jiang').css({
+        'fontSize': '24px',
+        'color': '#417CC6'
+      })
+
+      // 4、查父节点
+      $('#caoCao').parent().css('borderColor', 'black')
+
+      // 5、选择索引为index的节点（从0开始）
+      let obj = {
+        'fontSize': '24px',
+        'color': 'black'
+      }
+      $('#beiWeiMenber > li').eq(4).css(obj)
+      $('#beiWeiMenber > li').eq(5).css(obj)
+      $('#beiWeiMenber > li').eq(6).css(obj)
+      $('#beiWeiMenber > li').eq(7).css(obj)
+
+      // 6、上一个兄弟节点
+      $('#beiWei').prev().children().css('borderColor', '#CB9F46')
+
+      // 7、下一个兄弟节点
+      $('#beiWei').next().children().css('borderColor', '#417CC6')
+
+    })
+  </script>
+</body>
+</html>
