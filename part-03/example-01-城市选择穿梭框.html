@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>城市选择穿梭框</title>
+  <style>
+    .container {
+      width: 562px;
+      height: 318px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .left-transfer, .right-transfer {
+      width: 200px;
+      height: 100%;
+      box-sizing: border-box;
+      border: 1px solid #ECEEF4;
+    }
+    .left-transfer .header, .right-transfer .header {
+      width: 100%;
+      height: 38px;
+      padding: 0 10px;
+      background-color: #F5F7FA;
+      box-sizing: border-box;
+      border-bottom: 1px solid #ECEEF4;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .left-transfer .ops-num, .right-transfer .ops-num {
+      font-size: 12px;
+      color: #9D9FA4;
+    }
+    .options {
+      width: 162px;
+      height: 32px;
+      text-align: center;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    ul li {
+      list-style: none;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    .list1, .list2 {
+      padding: 10px 10px 0;
+      box-sizing: border-box;
+      width: 100%;
+      height: calc(100% - 38px);
+      overflow: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-transfer">
+      <div class="header">
+        <div class="check-all">
+          <input type="checkbox" id="listOne">
+          <span>list1</span>
+        </div>
+        <div class="ops-num">
+          <span id="checkedNum">0</span>
+          /
+          <span id="allCheckNum">0</span>
+        </div>
+      </div>
+      <div class="list1">
+        <ul>
+        </ul>
+      </div>
+    </div>
+
+    <div class="options">
+      <button class="cancel"><</button>
+      <button class="check">></button>
+    </div>
+
+    <div class="right-transfer">
+      <div class="header">
+        <div class="check-all">
+          <input type="checkbox" id="listTwo">
+          <span>list2</span>
+        </div>
+        <div class="ops-num">
+          <span id="choosedNum">0</span>
+          /
+          <span id="allChoosedNum">0</span>
+        </div>
+      </div>
+      <div class="list2">
+        <ul>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $(function() {
+      const list1 = [
+      {
+        text: 'option1'
+      },
+      {
+        text: 'option2'
+      },
+      {
+        text: 'option3'
+      },
+      {
+        text: 'option4'
+      },
+      {
+        text: 'option5'
+      },
+      {
+        text: 'option6'
+      },
+      {
+        text: 'option7'
+      },
+      {
+        text: 'option8'
+      },
+      {
+        text: 'option9'
+      },
+      {
+        text: 'option10'
+      },
+    ];
+      list1.forEach(element => {
+        $('.list1 > ul').append($(`
+          <li>
+            <input type="checkbox" id="list1${element.text}">
+            <span>${element.text}</span>
+          </li> 
+        `))
+      });
+      $('#allCheckNum').text(list1.length);
+    })
+
+    // 全选
+    function checkAll(e) {
+      let id = e.target.id
+      let className = id === 'listOne' ? 'list1' : 'list2'
+      let status = $(`#${id}`).prop('checked')
+      $(`.${className} input`).each((index, element)=>{
+        $(element).prop('checked', status);
+      })
+      updateCheckedNum();
+    }
+    $('#listOne').on('change', checkAll)
+
+    $('#listTwo').on('change', checkAll)
+
+    // 选中
+    $('.options > .check').on('click', function() {
+      $('.list1 input').each((index, element)=>{
+        if($(element).prop('checked')) {
+          $('.list2 > ul').append($(element).parent());
+        }
+      })
+      updateCheckedNum();
+      updateCheckAllFlag();
+    })
+
+    // 取消选择
+    $('.options > .cancel').on('click', function() {
+      $('.list2 input').each((index, element)=>{
+        if($(element).prop('checked')) {
+          $(element).prop('checked', false)
+          $('.list1 > ul').append($(element).parent());
+        }
+      })
+      updateCheckedNum();
+      updateCheckAllFlag();
+    })
+
+    // 选择冒泡监听
+    $('.list1').on('click', 'input', function(e) {
+      updateCheckedNum();
+      updateCheckAllFlag();
+    })
+    $('.list2').on('click', 'input', function(e) {
+      updateCheckedNum();
+      updateCheckAllFlag();
+    })
+
+    // 更新已选择数量和总量
+    function updateCheckedNum() {
+      let list1Arr = Array.from($('.list1 input'));
+      let list2Arr = Array.from($('.list2 input'));
+      
+
+      let list1Checked = list1Arr.reduce(
+        (pre, curr) => $(curr)[0].checked ? ++pre : pre,
+        0
+      )
+      let list1Total = $('.list1 input').length;
+
+      let list2Checked = list2Arr.reduce(
+        (pre, curr) => $(curr)[0].checked ? ++pre : pre,
+        0
+      )
+      let list2Total = $('.list2 input').length;
+
+      $('#checkedNum').text(list1Checked);
+      $('#choosedNum').text(list2Checked);
+      $('#allCheckNum').text(list1Total);
+      $('#allChoosedNum').text(list2Total);
+    }
+
+    // 更新全选标识
+    function updateCheckAllFlag() {
+      $('#listOne').prop(
+        'checked', 
+        $('#checkedNum').text() === $('#allCheckNum').text()
+        && Number($('#allCheckNum').text()) !== 0
+      );
+      $('#listTwo').prop(
+        'checked', 
+        $('#choosedNum').text() === $('#allChoosedNum').text()
+        && Number($('#allChoosedNum').text()) !== 0
+      );
+    }
+
+  </script>
+</body>
+</html>

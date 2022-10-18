@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>五角星评分</title>
+  <link href="https://cdn.bootcdn.net/ajax/libs/reseter.css/2.0.0/minireseter.css" rel="stylesheet">
+  <style>
+    ul {
+      margin: 0;
+      padding: 0;
+      height: 20px;
+      display: inline-block;
+    }
+    li {
+      width: 20px;
+      height: 20px;
+      list-style: none;
+      display: inline-block;
+    }
+    button {
+      margin-left: 5px;
+      margin-bottom: 5px;
+    }
+    p {
+      margin: 0;
+    }
+    .line-container {
+      height: 20px;
+      width: 325px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin: 0 auto 15px;
+    }
+    .line-container > .tip {
+      width: 67px;
+      height: 18px;
+      position: relative;
+      display: none;
+    }
+    .line-container > .tip > .tip-text {
+      line-height: 18px;
+      position: absolute;
+      left: 12px;
+      font-size: 12px;
+      font-weight: 400;
+    }
+    .line-container > .describe-list {
+      margin: 0 9px 0;
+    }
+    .line-container > .describe-list img {
+      width: 20px;
+      height: 20px;
+    }
+    .line-container > .good-tip > .tip-text {
+      color: #DD2727;
+    }
+    .line-container > .medium-tip > .tip-text {
+      color: #F0B860;
+    }
+    .line-container > .bad-tip > .tip-text {
+      color: #999999;
+    }
+  </style>
+</head>
+<body>
+  <div id="lineOne" class="line-container">
+    <span style="font-size: 14px;">
+      <span style="color: red; font-size: 12px;">*</span>
+      描述相符
+    </span>
+    <ul id="describe" class="describe-list">
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+    </ul>
+    <div class="tip">
+      <img>
+      <span class="tip-text"></span>
+    </div>
+  </div>
+  <div id="lineTwo" class="line-container">
+    <span style="font-size: 14px;">
+      <span style="color: red; font-size: 12px;">*</span>
+      卖家服务
+    </span>
+    <ul id="sellService" class="describe-list">
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+    </ul>
+    <div class="tip">
+      <img>
+      <span class="tip-text"></span>
+    </div>
+  </div>
+  <div id="lineThree" class="line-container">
+    <span style="font-size: 14px;">
+      <span style="color: red; font-size: 12px;">*</span>
+      物流服务
+    </span>
+    <ul id="logisticsService" class="describe-list">
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+      <li><img></li>
+    </ul>
+    <div class="tip">
+      <img>
+      <span class="tip-text"></span>
+    </div>
+  </div>
+  <script src="../jquery-3.6.1.js"></script>
+  <script>
+    $(function () { 
+      changeStars('.describe-list img', 'nothing');
+    })
+
+    let describeStarsStatus = {
+      number: 0,
+      status: 'nothing'
+    }
+    let sellStarsStatus = {
+      number: 0,
+      status: 'nothing'
+    }
+    let logisticsStarsStatus = {
+      number: 0,
+      status: 'nothing'
+    }
+
+    $('#describe')
+      .on('mouseenter', 'img', function(e) {
+        resolveMouseEnter('describe', 'lineOne', e);
+      })
+      .on('mouseleave', 'img', function(e) {
+        resolveMouseLeave('describe', 'lineOne', describeStarsStatus);
+      })
+      .on('click', 'img', function(e) {
+        resolveClick('describe', 'lineOne', describeStarsStatus, e)
+      })
+
+    $('#sellService')
+      .on('mouseenter', 'img', function(e) {
+        resolveMouseEnter('sellService', 'lineTwo', e);
+      })
+      .on('mouseleave', 'img', function(e) {
+        resolveMouseLeave('sellService', 'lineTwo', sellStarsStatus);
+      })
+      .on('click', 'img', function(e) {
+        resolveClick('sellService', 'lineTwo', sellStarsStatus, e)
+      })
+
+    $('#logisticsService')
+      .on('mouseenter', 'img', function(e) {
+        resolveMouseEnter('logisticsService', 'lineThree', e);
+      })
+      .on('mouseleave', 'img', function(e) {
+        resolveMouseLeave('logisticsService', 'lineThree', logisticsStarsStatus);
+      })
+      .on('click', 'img', function(e) {
+        resolveClick('logisticsService', 'lineThree', logisticsStarsStatus, e)
+      })
+
+    function resolveMouseEnter(targetId, lineId, event) {
+      currentEnterPos = $(`#${targetId} img`).index($(event.target));
+      let status = judgeStarColor(currentEnterPos+1);
+      changeStars(`#${targetId} img`, status, currentEnterPos);
+      showScoreTip(`#${lineId} .tip`, currentEnterPos+1);
+    }
+
+    function resolveMouseLeave(targetId, lineId, currentStatus) {
+      changeStars(`#${targetId} img`, currentStatus.status, currentStatus.number-1);
+      if(currentStatus.status === 'nothing'){
+        $(`#${lineId} .tip`).css('display', 'none');
+      } else {
+        showScoreTip(`#${lineId} .tip`, currentStatus.number);
+      }
+    }
+
+    function resolveClick(targetId, lineId, currentStatus, event) {
+      currentEnterPos = $(`#${targetId} img`).index($(event.target));
+      let status = judgeStarColor(currentEnterPos+1);
+      currentStatus.number = currentEnterPos + 1;
+      currentStatus.status = status;
+      changeStars(`#${targetId} img`, status, currentEnterPos);
+      showScoreTip(`#${lineId} .tip`, currentEnterPos+1);
+    }
+
+    // 判断五角星是什么形状
+    function judgeStarColor(num) { 
+      if(num<2) {
+        return 'bad'
+      } else if(num>=2 && num<4) {
+        return 'medium'
+      } else {
+        return 'good'
+      }
+    }
+
+    // 改变五角星状态
+    function changeStars(target, status, position) {
+      const imgMap = {
+        good: '../assets/好评.png',
+        medium: '../assets/中评.png',
+        bad: '../assets/差评.png',
+        nothing: '../assets/无评分.png',
+      }
+      $(target).each((index, element)=>{
+        if(position >= 0 && index <= position) {
+          $(element).attr('src', imgMap[status]);
+          return
+        }
+        $(element).attr('src', imgMap.nothing);
+      })
+    }
+
+    // 显示分数
+    function showScoreTip(target, score) {
+      let text = '';
+      let address = ''
+      if(score<2){
+        text = `${score}分 失望`
+        address = 'https://img.alicdn.com/tps/i3/TB1ntQyHVXXXXcWXFXX6JIf.VXX-134-36.png'
+      } else if (score<4){
+        text = `${score}分 一般`
+        address = 'https://img.alicdn.com/tps/i4/TB1.AgzHVXXXXcXXFXX6JIf.VXX-134-36.png'
+      } else {
+        text = `${score}分 惊喜`
+        address = 'https://img.alicdn.com/tps/i2/TB1fLEuHVXXXXagXVXX6JIf.VXX-134-36.png'
+      }
+      $(`${target} .tip-text`).text(text);
+      $(`${target} img`).attr('src', address);
+      $(target).css('display', 'block');
+    }
+
+  </script>
+</body>
+</html>
